@@ -1,19 +1,19 @@
 # Binance
-MACD oscillator signaling based on Binance API data in Python
+MACD oscillator signaling based on API data in Python
 
 - Dependencies :
-The folling command should be executed prior to the first execution :
+The following command should be executed prior to the first execution :
 
 pip install -r requirements.txt
 
 - Usage :
 
-python main.py --key [API Key] --secret [API Secret] --left [Currency] --right [Currency]
+python main.py --exchange [Exchange name] --minutes [Number of minutes]--left [Currency] --right [Currency]
 
 Where the parameters are the following :
-- key : Binance API Key
+- exchange : Target exchange
 
-- secret : Binance API Secret
+- minutes : MACD timespan in minutes
 
 - left : Left-hand side of the exchange pair
 

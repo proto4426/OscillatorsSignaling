@@ -9,15 +9,15 @@ def validate_usage(args):
     """
     Usage validation
     """
-    if not args.key or not args.secret:
+    if not args.exchange or not args.minutes or not args.left or not args.right:
         return False
     return True
 
 
 if __name__ == "__main__":
     parser = configargparse.get_argument_parser()
-    parser.add('--key', help='Binance API Key')
-    parser.add('--secret', help='Binance API Secret')
+    parser.add('--exchange', help='Target Exchange')
+    parser.add('--minutes', help='MACD timespan in minutes')
     parser.add('--left', help='Left-hand side of the exchange pair')
     parser.add('--right', help='Right-hand side of the exchange pair')
     parser.add('-v', help='Verbose output', action='store_true')
@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     if not validate_usage(args):
         print("Invalid or missing arguments. Usage : ")
-        print("python main.py --key [API Key] --secret [API Secret] --left [Currency] --right [Currency]")
+        print("python main.py --exchange [Exchange name] --minutes [Number of minutes]--left [Currency] --right [Currency]")
         exit(-1)
 
     main()
