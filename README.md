@@ -1,4 +1,4 @@
-# Binance
+# Cryptotrading Signaling via Oscillators
 MACD oscillator signaling based on API data in Python
 
 - Dependencies :
