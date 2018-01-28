@@ -1,10 +1,6 @@
 # Cryptotrading Signaling via Oscillators
 MACD oscillator signaling based on API data in Python
 
-<p align="center">
-  <img src="http://www.radartutorial.eu/11.coherent/pic/coho-big.gif" alt="Oscillator lol j/k"/>
-</p>
-
 ## Dependencies :
 The following command should be executed prior to the first execution :
 
@@ -27,3 +23,7 @@ Where the parameters are the following :
 
 ## Acknowledgements
 This program is built upon [CryptoCompare](https://www.cryptocompare.com/) API. Data visualization is provided based on the work of [Roman Orac](https://romanorac.github.io/).
+
+<p align="center">
+  <img src="http://www.radartutorial.eu/11.coherent/pic/coho-big.gif" alt="Oscillator lol j/k"/>
+</p>
