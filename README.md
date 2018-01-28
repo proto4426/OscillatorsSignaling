@@ -2,7 +2,7 @@
 MACD oscillator signaling based on API data in Python
 
 <p align="center">
-  <img src="http://www.reactiongifs.us/wp-content/uploads/2013/10/nuh_uh_conan_obrien.gif" alt="Oscillator lol j/k"/>
+  <img src="http://www.radartutorial.eu/11.coherent/pic/coho-big.gif" alt="Oscillator lol j/k"/>
 </p>
 
 ## Dependencies :
