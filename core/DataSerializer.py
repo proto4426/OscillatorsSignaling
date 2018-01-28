@@ -1,8 +1,9 @@
-from binance.client import Client
 import numpy as np
 import configargparse
 import requests
 import pandas as pd
+
+from binance.client import Client
 from datetime import datetime, timedelta
 from stockstats import StockDataFrame
 from math import pi
@@ -18,14 +19,6 @@ class DataSerializer:
     to_symbol = None
     exchange = None
     datetime_interval = 'minute'
-
-    current_time_full = datetime.now().time().isoformat()
-    tokens = current_time_full.split(":",2)
-    print(tokens[0] + ":" + tokens[1])
-
-    delta_time_full = (datetime.now() - timedelta(minutes=15)).time().isoformat()
-    tokens = delta_time_full.split(":",2)
-    print(tokens[0] + ":" + tokens[1])
 
     datetime_from = None
     datetime_to = None
@@ -48,7 +41,7 @@ class DataSerializer:
         return '%s_%s_%s_%s_%s.csv' % (from_symbol, to_symbol, exchange, datetime_interval, download_date)
 
 
-    def download_data(self, from_symbol, to_symbol, exchange, datetime_interval):
+    def download_data(self, from_symbol, to_symbol, exchange, datetime_interval, limit=2000):
         supported_intervals = {'minute', 'hour', 'day'}
         assert datetime_interval in supported_intervals,\
             'datetime_interval should be one of %s' % supported_intervals
@@ -59,7 +52,7 @@ class DataSerializer:
         url = '%s%s' % (base_url, datetime_interval)
 
         params = {'fsym': from_symbol, 'tsym': to_symbol,
-                  'limit': 2000, 'aggregate': 1,
+                  'limit': limit, 'aggregate': 1,
                   'e': exchange}
         request = requests.get(url, params=params)
         data = request.json()

@@ -1,8 +1,9 @@
-from binance.client import Client
 import numpy as np
 import configargparse
 import requests
 import pandas as pd
+
+from binance.client import Client
 from datetime import datetime, timedelta
 from stockstats import StockDataFrame
 from math import pi
@@ -15,7 +16,7 @@ class DataVisualizer:
     """
 
     def __init__(self):
-        print("hi")
+        pass
 
     def read_dataset(self, filename):
         print('Reading data from %s' % filename)
