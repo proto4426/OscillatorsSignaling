@@ -138,23 +138,6 @@ class DataSerializer:
         histogram = list(map(lambda pair: pair[0] - pair[1], list(zip(macd_line[self.MACD_HI:len(macd_line)], signal_line[self.MACD_SIGNAL:len(signal_line)]))))
         return (macd_line, signal_line, histogram)
 
-    def read_dataset(self, filename):
-        print('Reading data from %s' % filename)
-        df = pd.read_csv(filename)
-        df.datetime = pd.to_datetime(df.datetime) # change type from object to datetime
-        df = df.set_index('datetime')
-        df = df.sort_index() # sort by datetime
-        print(df.shape)
-        return df
-
-    def get_candlestick_width(self, datetime_interval):
-        if datetime_interval == 'minute':
-            return 30 * 60 * 30  # half minute in ms
-        elif datetime_interval == 'hour':
-            return 0.5 * 60 * 60 * 1000  # half hour in ms
-        elif datetime_interval == 'day':
-            return 12 * 60 * 60 * 1000  # half day in ms
-
     def execute(self):
 
         data = self.download_data(self.from_symbol, self.to_symbol, self.exchange, self.datetime_interval)
