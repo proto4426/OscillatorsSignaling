@@ -9,9 +9,9 @@ from math import pi
 from bokeh.plotting import figure, show, output_notebook, output_file
 output_notebook()
 
-class ApiAccess:
+class DataSerializer:
     """
-    Binance API Access Class
+    Serializer for exchange API data
     """
 
     from_symbol = None
@@ -27,8 +27,6 @@ class ApiAccess:
     tokens = delta_time_full.split(":",2)
     print(tokens[0] + ":" + tokens[1])
 
-    # datetime_from = '2018-01-27 00:00'
-    # datetime_to = '2018-01-27 23:45'
     datetime_from = None
     datetime_to = None
     # Default interval count
@@ -167,36 +165,4 @@ class ApiAccess:
         filename = self.get_filename(self.from_symbol, self.to_symbol, self.exchange, self.datetime_interval, current_datetime)
         print('Saving data to %s' % filename)
         df.to_csv(filename, index=False)
-
-        df = self.read_dataset(filename)
-        df = StockDataFrame.retype(df)
-        df['macd'] = df.get('macd')
-
-        df_limit = df[self.datetime_from: self.datetime_to].copy()
-        inc = df_limit.close > df_limit.open
-        dec = df_limit.open > df_limit.close
-
-        title = '%s datapoints from %s to %s for %s and %s from %s with MACD strategy' % (
-            self.datetime_interval, self.datetime_from, self.datetime_to, self.from_symbol, self.to_symbol, self.exchange)
-        p = figure(x_axis_type="datetime",  plot_width=1000, title=title)
-
-        p.line(df_limit.index, df_limit.close, color='black')
-
-        # plot macd strategy
-        p.line(df_limit.index, 0, color='black')
-        p.line(df_limit.index, df_limit.macd, color='blue')
-        p.line(df_limit.index, df_limit.macds, color='orange')
-        p.vbar(x=df_limit.index, bottom=[
-               0 for _ in df_limit.index], top=df_limit.macdh, width=4, color="purple")
-
-        # plot candlesticks
-        candlestick_width = self.get_candlestick_width(self.datetime_interval)
-        p.segment(df_limit.index, df_limit.high,
-                  df_limit.index, df_limit.low, color="black")
-        p.vbar(df_limit.index[inc], candlestick_width, df_limit.open[inc],
-               df_limit.close[inc], fill_color="#D5E1DD", line_color="black")
-        p.vbar(df_limit.index[dec], candlestick_width, df_limit.open[dec],
-               df_limit.close[dec], fill_color="#F2583E", line_color="black")
-
-        output_file("visualizing_trading_strategy.html", title="visualizing trading strategy")
-        show(p)
+        return filename

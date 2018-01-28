@@ -1,9 +1,12 @@
 import configargparse
-from apiaccess import ApiAccess
+from DataSerializer import DataSerializer
+from DataVisualizer import DataVisualizer
 
 def main():
-    apiaccess = ApiAccess()
-    apiaccess.execute()
+    serializer = DataSerializer()
+    visualizer = DataVisualizer()
+    filename = serializer.execute()
+    visualizer.visualize(filename, serializer.datetime_from, serializer.datetime_to, serializer.datetime_interval, serializer.from_symbol, serializer.to_symbol, serializer.exchange)
 
 def validate_usage(args):
     """
